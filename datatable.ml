@@ -104,7 +104,7 @@ let union_array array_1 array_2 =
   union array_1 array_2 len (Array.make len false) 0
 
 
-(** [union_array array_1 array_2] is a new array that has a 1 in every index 
+(** [intersect_array array_1 array_2] is a new array that has a 1 in every index 
     where BOTH [array_1] and [array_2] had a 1. All other indices are 0.
     Requires: [array_1] and [array_2] have equal length.*)
 let intersect_array array_1 array_2 =
