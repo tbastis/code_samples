@@ -1,5 +1,5 @@
 // Written by Thomas Bastis
-// This code performs a DFS on a graph, and prints out the preoder ordering 
+// This code performs a DFS on a graph, and prints out the preorder ordering
 // of the nodes in the graph, as well as the type of each edge.
 // "type" referring to one of tree, back, forward or cross.
 
@@ -12,11 +12,11 @@ class Main {
 
     /** Takes as input to stdin a sequence of integers representing a valid directed graph, and
      * prints to stdout the preorder ordering of the nodes of that graph, as well as the type of
-     * each edge in the graph. \n 
-     * Precondition: The first line of input is two numbers, seperated by 
-     * a space, which indicate the number of nodes and edges, respectively. Then, 
-     * there is a number of next lines of input equal to the number of edges, which also contain two
-     * numbers x y, which signifies an edge from node x to node y. */
+     * each edge in the graph. <br>
+     * Precondition: The first line of input is two numbers, seperated by a space, which indicate
+     * the number of nodes and edges, respectively. Then, there is a number of next lines of input
+     * equal to the number of edges, which each contain two numbers x y, which signifies an edge
+     * from node x to node y. */
     public static void main(String args[]) throws java.io.IOException {
         Scanner scan= new Scanner(System.in);
         Node[] nodes= new Node[scan.nextInt()];
@@ -26,7 +26,7 @@ class Main {
         }
 
         for (int i= 0; i < edges.length; i++ ) {
-            Node n= nodes[scan.nextInt()]; 
+            Node n= nodes[scan.nextInt()];
             Edge e= new Edge(n, nodes[scan.nextInt()]);
             edges[i]= e;
             n.addNeighbor(e);
@@ -34,7 +34,8 @@ class Main {
         scan.close();
 
         int[] ordering= dfs(nodes, edges.length);
-        for (int i= 0; i < nodes.length - 1; i++ ) {
+
+        for (int i= 0; i < nodes.length - 1; i++ ) { // below could be optimized with StringBuilder
             System.out.print(ordering[i] + " ");
         }
         System.out.print(ordering[nodes.length - 1] + "\n");
@@ -125,7 +126,7 @@ class Main {
         ArrayList<Edge> neighbors;
 
         /** An instance of a Node */
-        Node(int number) {
+        protected Node(int number) {
             this.number= number;
             neighbors= new ArrayList<>();
         }
@@ -148,12 +149,12 @@ class Main {
         /** The head of the edge */
         Node num2;
         /** The type of the edge, if known */
-        char type;
+        Character type;
         /** = this edge and all of its decendents been travered during the execution of dfs */
         boolean traversed;
 
         /** An instance of an edge. */
-        Edge(Node num1, Node num2) {
+        protected Edge(Node num1, Node num2) {
             this.num1= num1;
             this.num2= num2;
         }
