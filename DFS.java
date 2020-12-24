@@ -13,10 +13,9 @@ class Main {
     /** Takes as input to stdin a sequence of integers representing a valid directed graph, and
      * prints to stdout the preorder ordering of the nodes of that graph, as well as the type of
      * each edge in the graph. <br>
-     * Precondition: The first line of input is two numbers, seperated by a space, which indicate
-     * the number of nodes and edges, respectively. Then, there is a number of next lines of input
-     * equal to the number of edges, which each contain two numbers x y, which signifies an edge
-     * from node x to node y. */
+     * Precondition: The first line of input is two numbers which indicate the number of nodes and 
+     * edges, respectively. Then, there is a number of next lines of input equal to the number of 
+     * edges, which each contain two numbers x y, which signifies an edge from node x to node y. */
     public static void main(String args[]) throws java.io.IOException {
         Scanner scan= new Scanner(System.in);
         Node[] nodes= new Node[scan.nextInt()];
