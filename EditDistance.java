@@ -1,34 +1,17 @@
-
-/** Author: Thomas Bastis (tab267) */
+// Written by Thomas Bastis
+// This code calculates the edit distance between two strings, and print out the edit distance,
+// along with an optimal alignment of the two strings.
+// "edit distance" is the smallest number of single-letter insertions, deletions, or
+// substitutions needed to change one string to the other.
 
 import java.util.Scanner;
 
 class Main {
 
-    /** And instance containing information about the edit distance of two strings. */
-    public static class EditDistance {
-        /** = the edit distance of strings s1 and s2 */
-        int distance;
-        /** The "aligned" version of s1, with spaces inserted to indicate where adding spaces was
-         * optimal. */
-        String s1;
-        /** The "aligned" version of s1, with spaces inserted to indicate where adding spaces was
-         * optimal. */
-        String s2;
-
-        /** Returns an instance containing information about the edit distance of two strings.
-         * Precondition: distance is the edit distance of strings s1 and s2, and s1 and s2 are the
-         * optimally "aligned" versions of s1 and s2 respectively. */
-        EditDistance(int distance, String s1, String s2) {
-            this.distance= distance;
-            this.s1= s1;
-            this.s2= s2;
-        }
-
-    }
-
     /** Takes as input to stdin a pair of strings, and prints to stdout the edit distance of the two
-     * strings, as well as a representation of their optimal alignment. */
+     * strings, as well as a representation of their optimal alignment. <br>
+     * Precondition: The first string is provided on the first line of input, and the second string
+     * on the second line of input. */
     public static void main(String args[]) throws java.io.IOException {
         Scanner scan= new Scanner(System.in);
         String s1= scan.nextLine(); // Get the first input string
@@ -74,7 +57,7 @@ class Main {
                     // A[i][j] (edit distance up through chars at i and j)
                     // A[i][j + 1] (edit distance up through chars at i and j+1), and
                     // A[i + 1][j] (edit distance up through chars at i+1 and j)
-                    // Plus 1, to account for edit distance of characters we're processing.
+                    // plus 1, to account for edit distance of characters we're processing.
                 }
             }
         }
@@ -86,17 +69,17 @@ class Main {
                                  // s2 to sb2.
 
             if (m == 0) { // We've added every letter of s1 to sb1
-                sb1.append(' '); // Add space to sb1
+                sb1.append(' ');
                 sb2.append(s2arr[n - 1]); // Add the next remaining unadded letter of s2 to sb2.
                 n-- ; // Decrement number of letters remaining of s2 to be added.
-                continue; // Jump to next iteration
+                continue;
             }
 
             if (n == 0) { // We've added every letter of s2 to sb2
                 sb1.append(s1arr[m - 1]); // Add the next remaining unadded letter of s1 to sb1.
-                sb2.append(' '); // Add space to sb2
+                sb2.append(' ');
                 m-- ; // Decrement number of letters remaining of s1 to be added.
-                continue; // Jump to next iteration
+                continue;
             }
 
             int up= A[m - 1][n]; // edit distance in cell above
@@ -118,15 +101,15 @@ class Main {
 
             } else if (min == left) { // The path came from the cell to the left, indicating it was
                                       // optimal to align the next character in s2 with a space.
-                sb1.append(' '); // Add space to sb1
+                sb1.append(' ');
                 sb2.append(s2arr[n - 1]); // Add the next remaining unadded letter of s2 to sb2.
                 n-- ; // Decrement number of letters remaining of s2 to be added.
 
             } else {// The path came from the cell above, indicating it was optimal to
                 // align the next character in s1 with a space.
                 sb1.append(s1arr[m - 1]); // Add the next remaining unadded letter of s1 to sb1.
-                sb2.append(' '); // Add space to sb2
-                m-- ; // Decrement number of letters remaining of s1 to be added.S
+                sb2.append(' ');
+                m-- ; // Decrement number of letters remaining of s1 to be added.
             }
 
         }
@@ -137,6 +120,28 @@ class Main {
 
         // Return an object holding all of the information we care about.
         return new EditDistance(A[s1arr.length][s2arr.length], sb1.toString(), sb2.toString());
+    }
+
+    /** And instance containing information about the edit distance of two strings. */
+    public static class EditDistance {
+        /** = the edit distance of strings s1 and s2 */
+        int distance;
+        /** The "aligned" version of s1, with spaces inserted to indicate where adding spaces was
+         * optimal. */
+        String s1;
+        /** The "aligned" version of s1, with spaces inserted to indicate where adding spaces was
+         * optimal. */
+        String s2;
+
+        /** Returns an instance containing information about the edit distance of two strings. <br>
+         * Precondition: distance is the edit distance of strings s1 and s2, and s1 and s2 are the
+         * optimally "aligned" versions of s1 and s2 respectively. */
+        protected EditDistance(int distance, String s1, String s2) {
+            this.distance= distance;
+            this.s1= s1;
+            this.s2= s2;
+        }
+
     }
 
 }
