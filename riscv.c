@@ -1,3 +1,9 @@
+// Written by Thomas Bastis
+// This is an interpreter for the RISC-V assembly language (.h files excluded).
+// It has support for 19 of the most common operations, as enumerated in the
+// get_op_type function.
+// The size of memory can be changed in the init function (line 68).
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -62,7 +68,7 @@ void init(registers_t *starting_registers)
     memory = ht_init(256);
 }
 
-// Removes all ' ' characters from string
+/** Removes all ' ' characters from string */
 char *remove_spaces(char *str)
 {
     char *new_str = str;
@@ -79,7 +85,7 @@ char *remove_spaces(char *str)
     return new_str;
 }
 
-// Gets integer value of string containing either decimal or hex.
+/** Gets integer value of string containing either decimal or hex. */
 int get_immediate(char *str)
 {
     if ((str[0] == '0') && (str[1] == 'x')) // positive hex
@@ -100,7 +106,6 @@ void step(char *instruction)
     // by replacing the space character with a null-terminator.
     // `instruction` now points to the next character after the space
     char *op = strsep(&instruction, " ");
-    // Uses the provided helper function to determine the type of instruction
     int op_type = get_op_type(op);
 
     // Skip this instruction if it is not in our supported set of instructions
@@ -109,7 +114,7 @@ void step(char *instruction)
         return;
     }
 
-    //remove all spaces from instruction
+    // remove all spaces from instruction
     char *reduced_ins = remove_spaces(instruction);
 
     if (op_type == R_TYPE)

@@ -1,3 +1,7 @@
+// Written by Thomas Bastis
+// This code implements a hashtable, which maps integers to integers. (for use
+// in riscv.c)
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "linkedlist.h"
@@ -16,6 +20,7 @@ struct hashtable
  */
 static int hash(int key, int max_range)
 {
+    // A very basic hashfunction
     key = (key > 0) ? key : -key;
     return key % max_range;
 }

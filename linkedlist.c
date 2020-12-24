@@ -1,3 +1,7 @@
+// Written by Thomas Bastis
+// This code implements a Linked List which can hold integers (for use in
+// hashtable.c)
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "linkedlist.h"
