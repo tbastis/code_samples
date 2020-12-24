@@ -1,3 +1,7 @@
+// Written by Thomas Bastis
+// This code implements the Union-Find data structure. The main function uses it to calculate the
+// minimum number of edges needed to fully connect a given undirected graph.
+
 import java.util.Scanner;
 
 class Main {
@@ -8,10 +12,10 @@ class Main {
         /** Representation of all the trees in the graph. The number at index i is the number of the
          * parent node of node i (indicating they are connected), or is i if i is the root of its
          * own tree. */
-        int[] trees;
+        private int[] trees;
 
         /** The number of disjoint trees in the graph */
-        int disjoint;
+        private int disjoint;
 
         /** Constructor: an instance with v initial nodes, hence v intial disjoint trees. */
         public UnionFind(int v) {
@@ -46,21 +50,25 @@ class Main {
         }
     }
 
-    /** Takes as input to stdin a sequence of integers representing a valid graph, and prints to
-     * stdout the minimum number of edges required to be added to connect all nodes (villages). */
+    /** Takes as input to stdin a sequence of integers representing a valid undirected graph, and
+     * prints to stdout the minimum number of edges required to be added to connect all nodes. <br>
+     * Precondition: The first line of input should be two numbers providing the number of nodes and
+     * edges in the graph, respectively. Then, there is a number of next lines of input equal to the
+     * number of edges, which each contain two numbers x y, which signifies an edge from node x to
+     * node y. */
     public static void main(String args[]) throws java.io.IOException {
         Scanner scan= new Scanner(System.in);
         UnionFind graph= new UnionFind(scan.nextInt()); // initialize union-find with number of
-                                                        // villages
+                                                        // nodes
         int edges= scan.nextInt();
         for (int i= 0; i < edges; i++ ) { // union all nodes who share an edge in the graph
             graph.union(scan.nextInt(), scan.nextInt());
         }
         scan.close();
-        System.out.println(graph.disjoint() - 1); // The answer is simply the number of
-                                                  // remaining disjoint components minus 1,
-                                                  // because we can connect one of the
-                                                  // components to all of the other ones using 1
-                                                  // edge each between them.
+        System.out.println(graph.disjoint() - 1); // The answer is the number of remaining
+                                                  // disjoint components minus 1, because
+                                                  // we can connect one of the components to
+                                                  // all of the other ones using 1 edge each 
+                                                  // between them.
     }
 }
