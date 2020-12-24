@@ -1,6 +1,11 @@
-(** This module represents a datatable *)
-open Command
+(* Written by Thomas Bastis *)
+(* This code was written as part of a larger project, which is an offline 
+ * database management system. I authored the entirety of this module (both .ml 
+ * and .mli).*)
 
+(** This module represents a datatable *)
+
+open Command
 
 (** The type of a datatable *)
 type t = string array array

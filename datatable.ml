@@ -1,4 +1,7 @@
+(* Written by Thomas Bastis *)
+
 open Command
+
 (** AF: A datatable represented as an array of rows, for which each row is 
     represented as array of columns. The first row is the header of the table. 
     Any empty cells are represented as the empty string. 
